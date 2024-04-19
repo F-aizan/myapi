@@ -1,2 +1,6 @@
 fastapi
 uvicorn
+python-dotenv
+motor
+pymongo
+python-multipart
