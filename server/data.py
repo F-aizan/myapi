@@ -1,0 +1,101 @@
+mock_data = [{
+  "id": 1,
+  "first_name": "Fallon",
+  "last_name": "Boatswain",
+  "email": "fboatswain0@examiner.com"
+}, {
+  "id": 2,
+  "first_name": "Odille",
+  "last_name": "Petchey",
+  "email": "opetchey1@google.com.au"
+}, {
+  "id": 3,
+  "first_name": "Anthe",
+  "last_name": "Boyack",
+  "email": "aboyack2@seattletimes.com"
+}, {
+  "id": 4,
+  "first_name": "Dennie",
+  "last_name": "Tarplee",
+  "email": "dtarplee3@rakuten.co.jp"
+}, {
+  "id": 5,
+  "first_name": "Kipper",
+  "last_name": "Lease",
+  "email": "klease4@npr.org"
+}, {
+  "id": 6,
+  "first_name": "Brian",
+  "last_name": "Levesley",
+  "email": "blevesley5@alibaba.com"
+}, {
+  "id": 7,
+  "first_name": "Shelden",
+  "last_name": "Easlea",
+  "email": "seaslea6@mozilla.com"
+}, {
+  "id": 8,
+  "first_name": "Orelia",
+  "last_name": "Corragan",
+  "email": "ocorragan7@t.co"
+}, {
+  "id": 9,
+  "first_name": "Druci",
+  "last_name": "Seathwright",
+  "email": "dseathwright8@imdb.com"
+}, {
+  "id": 10,
+  "first_name": "Alvira",
+  "last_name": "Rabier",
+  "email": "arabier9@cpanel.net"
+}, {
+  "id": 11,
+  "first_name": "Witty",
+  "last_name": "Larkin",
+  "email": "wlarkina@yandex.ru"
+}, {
+  "id": 12,
+  "first_name": "Clare",
+  "last_name": "Yuryaev",
+  "email": "cyuryaevb@microsoft.com"
+}, {
+  "id": 13,
+  "first_name": "Dell",
+  "last_name": "Vergo",
+  "email": "dvergoc@feedburner.com"
+}, {
+  "id": 14,
+  "first_name": "Nikola",
+  "last_name": "Glennie",
+  "email": "nglennied@sun.com"
+}, {
+  "id": 15,
+  "first_name": "Tildy",
+  "last_name": "McGeouch",
+  "email": "tmcgeouche@noaa.gov"
+}, {
+  "id": 16,
+  "first_name": "Joyce",
+  "last_name": "Hyrons",
+  "email": "jhyronsf@blog.com"
+}, {
+  "id": 17,
+  "first_name": "Darell",
+  "last_name": "Vynall",
+  "email": "dvynallg@cdbaby.com"
+}, {
+  "id": 18,
+  "first_name": "Roselin",
+  "last_name": "Dudmarsh",
+  "email": "rdudmarshh@amazon.com"
+}, {
+  "id": 19,
+  "first_name": "Addia",
+  "last_name": "McSkeagan",
+  "email": "amcskeagani@rakuten.co.jp"
+}, {
+  "id": 20,
+  "first_name": "Lisette",
+  "last_name": "Tarry",
+  "email": "ltarryj@pbs.org"
+}]

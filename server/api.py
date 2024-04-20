@@ -9,6 +9,7 @@ from typing import List, Union
 import base64
 
 from server.db import connect_db
+from server.data import mock_data
 
 app = FastAPI()
 
@@ -51,7 +52,7 @@ def type_data(obj) -> dict:
         "filesize": obj["filesize"]
     }
 
-@app.get("/blogs")
+@app.get("/")
 async def get_data_by_id_or_all(id: Union[str, None] = None):
     data = []
     if id is None:
@@ -64,9 +65,9 @@ async def get_data_by_id_or_all(id: Union[str, None] = None):
     else:
         return "no record found"
 
-@app.get('/hello')
-def hello_get():
-    return "hello world"
+@app.get('/data')
+def mock_json_data():
+    return mock_data
 
 @app.get("/")
 async def get_data():
