@@ -32,8 +32,13 @@ app.add_middleware(
 #         return "connection error"
 connection = connect_db()
 db = connection.get_database("FilesDatabase")
+
 coll = db.get_collection("uploadedfiles")
 obj_coll = db.get_collection("BucketObjects")
+
+# queue db details
+queue_db = connection.get_database("QueueDB")
+queue_coll = queue_db.get_collection("queuefiles")
 
 
 def helper_struct(obj) -> dict:
@@ -106,17 +111,27 @@ async def post_data(files: List[UploadFile]):
         return "error"
      
 
-@app.post("/miniofiles")
-async def upload_minio_files(files: List[UploadFile]):
-    try:
-        for file in files:
-            await obj_coll.insert_one({
-                "file": file.file.read()
-            })
-        return "files"
-    except Exception as e:
-        print(e)
+# @app.post("/miniofiles")
+# async def upload_minio_files(files: List[UploadFile]):
+#     try:
+#         for file in files:
+#             await obj_coll.insert_one({
+#                 "file": file.file.read()
+#             })
+#         return "files"
+#     except Exception as e:
+#         print(e)
 
+
+@app.post("/rabbitmqfiles")
+async def post_rabbitmqfiles(data: str):
+    try:
+        # await queue_coll.insert_one({
+        #     "file": Request.body
+        # })
+        return {"data": data}
+    except Exception as e:
+        return "Error occurred"
 
     
 @app.put("/")
