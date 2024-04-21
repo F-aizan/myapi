@@ -1,5 +1,4 @@
-import base64
-# from bson import ObjectId
+import base64, os
 from bson import ObjectId
 from fastapi import FastAPI, File, Form, Response, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,9 +6,12 @@ from fastapi.encoders import jsonable_encoder
 from typing_extensions import Annotated
 from typing import List, Union
 import base64
-
+from minio import Minio
 from server.db import connect_db
 from server.data import mock_data
+from dotenv import load_dotenv
+
+load_dotenv("miniofconfig.env")
 
 app = FastAPI()
 
@@ -23,14 +25,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# connect to db
-# async def get_db_params():
-#     connection = connect_db()
-#     db = connection.get_database("projectdb")
-#     if connection and db is not None:
-#         return db
-#     else:
-#         return "connection error"
+#minio_credentials 
+minio_client = Minio(
+    endpoint="127.0.0.1:9000",
+    access_key=os.environ.get("ACCESS_KEY"),
+    secret_key=os.environ.get("SECRET_KEY"),
+    secure=False
+)
+
 connection = connect_db()
 db = connection.get_database("FilesDatabase")
 
@@ -112,16 +114,18 @@ async def post_data(files: List[UploadFile]):
         return "error"
      
 
-# @app.post("/miniofiles")
-# async def upload_minio_files(files: List[UploadFile]):
-#     try:
-#         for file in files:
-#             await obj_coll.insert_one({
-#                 "file": file.file.read()
-#             })
-#         return "files"
-#     except Exception as e:
-#         print(e)
+@app.post("/uploadtominio")
+async def upload_minio_files(files: List[UploadFile]):
+    try:
+        for file in files:
+            file_content = file.file.read()
+            file_length = len(file_content)
+
+            file.file.seek(0)
+            minio_client.put_object(bucket_name="files", object_name=file.filename, data=file.file, length=file_length)
+        return "Files uploaded successfully"
+    except Exception as e:
+        return "Error occurred in uploading files"
 
 
 @app.post("/rabbitmqfiles")
@@ -130,9 +134,9 @@ async def post_rabbitmqfiles(data: str):
         # await queue_coll.insert_one({
         #     "file": Request.body
         # })
-        return {"data": data}
+        return data
     except Exception as e:
-        return "Error occurred"
+        return "Error occurred" 
 
     
 @app.put("/")
