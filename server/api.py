@@ -16,7 +16,6 @@ load_dotenv("miniofconfig.env")
 app = FastAPI()
 
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

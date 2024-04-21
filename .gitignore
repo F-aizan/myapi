@@ -3,3 +3,5 @@ venv
 env
 .env
 /env
+/server/dbconfig.env
+/server/minioconfig.env
