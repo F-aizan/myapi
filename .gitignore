@@ -4,8 +4,6 @@ env
 .env
 /env
 .__pycache__
-./__pycache__
-./server/dbconfig.env
-./server/minioconfig.env
-.server/dbconfig.env
-.server/minioconfig.env
+server/__pycache__
+server/dbconfig.env
+server/minioconfig.env
