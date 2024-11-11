@@ -42,6 +42,12 @@ def type_data(obj) -> dict:
         "file": obj["file"]
     }
 
+# return response on root
+@app.get("/")
+def readroot():
+    return {"response": "hello world"}
+
+# return data from mongodb
 @app.get("/mongodata")
 async def get_data_by_id_or_all(id: Union[str, None] = None):
     data = []
@@ -55,10 +61,12 @@ async def get_data_by_id_or_all(id: Union[str, None] = None):
     else:
         return "no record found"
 
+# return mock json data
 @app.get('/data')
 def mock_json_data():
     return mock_data
 
+# return files from mongodb
 @app.get("/files")
 async def get_data():
     try:
@@ -83,6 +91,7 @@ async def post_data(itemname: Annotated[str, None], itemprice: Annotated[int, No
     else:
         return "error in posting data"
 
+# post files in mongodb
 @app.post("/files")
 async def post_data(files: List[UploadFile]):
     try:
@@ -96,7 +105,7 @@ async def post_data(files: List[UploadFile]):
     except Exception as e:
         return "error" + str(e)
      
-    
+# update files in mongodb
 @app.put("/")
 async def update_records(id: str, itemname: str, itemprice: Annotated[int, None], itemImage: Annotated[bytes, File()] = None):
     record = await coll.find_one({"_id": ObjectId(id)})
@@ -112,6 +121,7 @@ async def update_records(id: str, itemname: str, itemprice: Annotated[int, None]
     else:
         return Response("Error updating record", status_code=500)
 
+# delete files 
 @app.delete("/{id}")
 async def delete_record(id: str):
     try:
