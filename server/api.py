@@ -1,5 +1,4 @@
-import base64
-# from bson import ObjectId
+import base64, os
 from bson import ObjectId
 from fastapi import FastAPI, File, Form, Response, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,12 +6,13 @@ from fastapi.encoders import jsonable_encoder
 from typing_extensions import Annotated
 from typing import List, Union
 import base64
-
 from server.db import connect_db
 from server.data import mock_data
+from dotenv import load_dotenv
+
+load_dotenv("miniofconfig.env")
 
 app = FastAPI()
-
 
 
 app.add_middleware(
@@ -23,19 +23,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# connect to db
-# async def get_db_params():
-#     connection = connect_db()
-#     db = connection.get_database("projectdb")
-#     if connection and db is not None:
-#         return db
-#     else:
-#         return "connection error"
 connection = connect_db()
 db = connection.get_database("FilesDatabase")
 coll = db.get_collection("uploadedfiles")
-obj_coll = db.get_collection("BucketObjects")
-
 
 def helper_struct(obj) -> dict:
     return {
