@@ -49,10 +49,10 @@ def type_data(obj) -> dict:
     return {
         "id": str(obj["_id"]),
         "filename": obj["filename"],
-        "filesize": obj["filesize"]
+        "file": obj["file"]
     }
 
-@app.get("/")
+@app.get("/mongodata")
 async def get_data_by_id_or_all(id: Union[str, None] = None):
     data = []
     if id is None:
@@ -69,7 +69,7 @@ async def get_data_by_id_or_all(id: Union[str, None] = None):
 def mock_json_data():
     return mock_data
 
-@app.get("/")
+@app.get("/files")
 async def get_data():
     try:
         data = []
@@ -77,7 +77,7 @@ async def get_data():
             data.append(type_data(doc))
         return data
     except Exception as e:
-        return "Error occurred" 
+        return "Error occurred" + str(e) 
     
 
 #post with image
@@ -104,21 +104,8 @@ async def post_data(files: List[UploadFile]):
             })
         return "posted"
     except Exception as e:
-        return "error"
+        return "error" + str(e)
      
-
-@app.post("/miniofiles")
-async def upload_minio_files(files: List[UploadFile]):
-    try:
-        for file in files:
-            await obj_coll.insert_one({
-                "file": file.file.read()
-            })
-        return "files"
-    except Exception as e:
-        print(e)
-
-
     
 @app.put("/")
 async def update_records(id: str, itemname: str, itemprice: Annotated[int, None], itemImage: Annotated[bytes, File()] = None):
