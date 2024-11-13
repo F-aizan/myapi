@@ -9,7 +9,6 @@ from server.db import connect_db
 from server.data import mock_data
 from dotenv import load_dotenv
 
-load_dotenv("miniofconfig.env")
 
 app = FastAPI()
 
